@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-   <html>
-   <head>
-       <title>Synths for Sale</title>
+<html>
+  <head>
+    <title>Synths for Sale</title>
     <link rel="stylesheet" href="style.css">
-   </head>
-   <body>
-       <h1>Synths for Sale</h1>
-       {{ range .Site.Data.synths }}
-       <div class="product">
-           <h2>{{ .name }}</h2>
-           <p><strong>{{ .brand }}</strong></p>
-           <p class="price">${{ .price }}</p>
-           {{ if .note }}<p><em>{{ .note }}</em></p>{{ end }}
-           {{ if .images }}
-           <div class="images">
-        {{ range .images }}<img src="{{ (printf "images/%s" .) }}" alt="">{{ end }}
-           </div>
-           {{ end }}
-       </div>
-       {{ end }}
-   </body>
-   </html>
+  </head>
+  <body>
+    <h1>Synths for Sale</h1>
+    <div class="notes">
+      <em>US only</em>
+      <p class="note">buyer pays shipping!</p>
+      <p class="note">Email me to purchase: <a href="mailto:faycarsons23@gmail.com">faycarsons23@gmail.com</a></p>
+    </div>
+    {{ range .Site.Data.synths }}
+    <div class="product">
+        <h2>{{ .name }}</h2>
+        <p><strong>{{ .brand }}</strong></p>
+        <p class="price">${{ .price }}</p>
+        {{ if .note }}<p><em>{{ .note }}</em></p>{{ end }}
+        {{ if .images }}
+        <div class="images">
+    {{ range .images }}<img src="{{ (printf "images/%s" .) }}" alt="">{{ end }}
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+  </body>
+</html>
