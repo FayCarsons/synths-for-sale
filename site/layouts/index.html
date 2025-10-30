@@ -6,10 +6,10 @@
   </head>
   <body>
     <h1>Synths for Sale</h1>
-    <div class="notes">
-      <em>US only</em>
-      <p class="note">buyer pays shipping!</p>
-      <p class="note">Email me to purchase: <a href="mailto:faycarsons23@gmail.com">faycarsons23@gmail.com</a></p>
+    <div class="info-header">
+      <em class="americans">US only</em>
+      <p class="info">buyer pays shipping!</p>
+      <p class="info">Email me to purchase: <a href="mailto:faycarsons23@gmail.com">faycarsons23@gmail.com</a></p>
     </div>
     {{ range .Site.Data.synths }}
     <div class="product">
@@ -19,7 +19,7 @@
         {{ if .note }}<p><em>{{ .note }}</em></p>{{ end }}
         {{ if .images }}
         <div class="images">
-    {{ range .images }}<img src="{{ (printf "images/%s" .) }}" alt="">{{ end }}
+          {{ range .images }}<img src="{{ (printf "images/%s" .) }}" alt="">{{ end }}
         </div>
         {{ end }}
     </div>
