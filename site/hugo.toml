@@ -1,4 +1,4 @@
-baseURL = 'https://faycarsons.github.io/synths-for-sale/'
+baseURL = 'https://faycarsons.github.io'
 languageCode = 'en-us'
 title = 'Fays Synth Hole'
 publishDir = "docs"
