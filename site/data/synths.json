@@ -1,0 +1,77 @@
+[
+  {
+    "brand": "Schlappi Engineering",
+    "images": [
+      "angle-grinder.png"
+    ],
+    "name": "Angle Grinder",
+    "price": 250
+  },
+  {
+    "brand": "Expert Sleepers",
+    "images": [
+      "disting1.png"
+    ],
+    "name": "Disting Ex",
+    "price": 300
+  },
+  {
+    "brand": "Expert Sleepers",
+    "images": [
+      "disting-broken-screen1.png",
+      "disting-broken-screen2.png"
+    ],
+    "name": "Disting Ex (damaged screen)",
+    "note": "This distings screen has a bunch of dead pixels(?) I think. Should be a relatively easy fix for the right person.",
+    "price": 200
+  },
+  {
+    "brand": "Expert Sleepers",
+    "images": [],
+    "name": "MIDI breakout",
+    "note": "$15 if bundled with a disting",
+    "price": 30
+  },
+  {
+    "brand": "Bastl",
+    "images": [
+      "ciao.png"
+    ],
+    "name": "Ciao",
+    "price": 75
+  },
+  {
+    "brand": "DivKid && Steady State Fate",
+    "images": [
+      "rnd-step.png"
+    ],
+    "name": "Rnd Step",
+    "price": 250
+  },
+  {
+    "brand": "ALA Audio?",
+    "images": [
+      "plaits.png"
+    ],
+    "name": "Plaits",
+    "note": "I think this is ALA audio, idk. A plaits clone. V1. Works as expected.",
+    "price": 75
+  },
+  {
+    "brand": "Make Noise",
+    "images": [
+      "make-noise-powered-skiff.png"
+    ],
+    "name": "Powered Skiff",
+    "note": "104hp",
+    "price": 200
+  },
+  {
+    "brand": "Elektron",
+    "images": [
+      "digitone.png"
+    ],
+    "name": "Digitone",
+    "price": 400
+  }
+]
