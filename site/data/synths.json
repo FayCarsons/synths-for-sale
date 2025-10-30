@@ -8,9 +8,26 @@
     "price": 250
   },
   {
+    "brand": "DivKid && Instruo",
+    "images": [
+      "ochd.png"
+    ],
+    "name": "Ochd",
+    "price": 150
+  },
+  {
+    "brand": "Mutable Instruments (clone?)",
+    "images": [
+      "stages.png"
+    ],
+    "name": "Stages",
+    "note": "IIRC this is actually a clone with an MI panel. Can double check if u care",
+    "price": 250
+  },
+  {
     "brand": "Expert Sleepers",
     "images": [
-      "disting1.png"
+      "disting.png"
     ],
     "name": "Disting Ex",
     "price": 300
@@ -18,8 +35,7 @@
   {
     "brand": "Expert Sleepers",
     "images": [
-      "disting-broken-screen1.png",
-      "disting-broken-screen2.png"
+      "coming-soon.jpg"
     ],
     "name": "Disting Ex (damaged screen)",
     "note": "This distings screen has a bunch of dead pixels(?) I think. Should be a relatively easy fix for the right person.",
@@ -35,7 +51,7 @@
   {
     "brand": "Bastl",
     "images": [
-      "ciao.png"
+      "coming-soon.jpg"
     ],
     "name": "Ciao",
     "price": 75
@@ -51,7 +67,8 @@
   {
     "brand": "ALA Audio?",
     "images": [
-      "plaits.png"
+      "plaits1.png",
+      "/plaits.png"
     ],
     "name": "Plaits",
     "note": "I think this is ALA audio, idk. A plaits clone. V1. Works as expected.",
@@ -60,7 +77,7 @@
   {
     "brand": "Make Noise",
     "images": [
-      "make-noise-powered-skiff.png"
+      "coming-soon.jpg"
     ],
     "name": "Powered Skiff",
     "note": "104hp",
@@ -69,7 +86,7 @@
   {
     "brand": "Elektron",
     "images": [
-      "digitone.png"
+      "coming-soon.jpg"
     ],
     "name": "Digitone",
     "price": 400
