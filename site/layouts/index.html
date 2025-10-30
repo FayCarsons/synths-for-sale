@@ -2,7 +2,7 @@
    <html>
    <head>
        <title>Synths for Sale</title>
-    <link rel="stylesheet" href='{{ "style.css" | absLangURL }}'>
+    <link rel="stylesheet" href='{{ "/style.css" | absLangURL }}'>
    </head>
    <body>
        <h1>Synths for Sale</h1>
@@ -14,7 +14,7 @@
            {{ if .note }}<p><em>{{ .note }}</em></p>{{ end }}
            {{ if .images }}
            <div class="images">
-        {{ range .images }}<img src="{{ (printf "images/%s" .) | absURL }}" alt="">{{ end }}
+        {{ range .images }}<img src="{{ (printf "/images/%s" .) | absURL }}" alt="">{{ end }}
            </div>
            {{ end }}
        </div>
