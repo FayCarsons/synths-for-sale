@@ -20,7 +20,7 @@ let setupPython =
       GHA.Step::{
       , name = Some "Set up Python3"
       , uses = Some "actions/setup-python@v4"
-      , `with` = Some (toMap { python-version = "3.11" })
+      , `with` = Some (toMap { python-version = "3.13" })
       }
 
 let setupUV =
