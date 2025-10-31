@@ -1,6 +1,7 @@
 name: Generate Workflow
 permissions:
   contents: write
+  workflows: write
 on:
   push:
     branches:
