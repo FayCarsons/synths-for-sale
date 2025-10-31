@@ -11,6 +11,8 @@ def main():
     output_file = sys.argv[2]
     stripe.api_key = os.getenv('STRIPE_SECRET_KEY')
 
+    print(f'STRIPE_SECRET_KEY: {stripe.api_key}')
+
     if not stripe.api_key:
         raise ValueError("Stripe key env var not set")
 
