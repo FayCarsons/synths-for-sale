@@ -34,7 +34,7 @@ def main():
         )
 
         session = stripe.checkout.Session.create(
-            payment_method_types=['card', 'paypal'],
+            payment_method_types=['cards', 'apple_pay', 'cash_app_pay', 'google_pay'],
             line_items=[{
                 'price': price.id,
                 'quantity': 1
