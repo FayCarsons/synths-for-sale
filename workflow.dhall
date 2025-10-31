@@ -69,11 +69,11 @@ in  GHA.Workflow::{
             , build
             , deploy
             ]
-          , permissions = Some
-            [ { mapKey = GHA.types.Permission.contents
-              , mapValue = GHA.types.PermissionAccess.write
-              }
-            ]
           }
         }
+    , permissions = Some
+      [ { mapKey = GHA.types.Permission.contents
+        , mapValue = GHA.types.PermissionAccess.write
+        }
+      ]
     }
