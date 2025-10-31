@@ -12,6 +12,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Install Dhall
+        run: | 
+          curl -L https://github.com/dhall-lang/dhall-haskell/releases/download/1.42.1/dhall-1.42.1-x86_64-linux.tar.bz2 -o dhall.tar.bz2
+          tar -xjf dhall.tar.bz2
+          sudo mv dhall-1.42.1/bin/dhall /usr/local/bin/
+          dhall --version
+
+      - name: Set up Python with uv
+        uses: astral-sh/setup-uv@v1
+
+      - name: Convert Dhall to JSON
+        run: dhall-to-json --file synths.dhall > site/data/synths.json
+
+      - name: "Generate Stripe checkout links"
+        env: 
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+        run: uv run PaymentLinks/main.py site/data/synths.json site/data/checkout-links.json
       
       - name: Install Hugo
         uses: peaceiris/actions-hugo@v2

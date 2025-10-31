@@ -31,6 +31,9 @@
               dhall-json
               dhall-lsp-server
               hugo
+
+              uv
+              python3
             ];
           };
       }
