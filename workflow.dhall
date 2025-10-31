@@ -3,12 +3,6 @@ let GHA =
 
 let checkout = GHA.Step::{ uses = Some "actions/checkout@v3" }
 
-let setupPython =
-      GHA.Step::{
-      , name = Some "Set up Python3 + UV"
-      , uses = Some "astral-sh/setup-uv@v1"
-      }
-
 let installDhall =
       GHA.Step::{
       , name = Some "Install Dhall"
@@ -20,6 +14,18 @@ let convertData =
       GHA.Step::{
       , name = Some "Convert Dhall to JSON"
       , run = Some "dhall-to-json --file synths.dhall > site/data/synths.json"
+      }
+
+let setupPython =
+      GHA.Step::{
+      , name = Some "Set up Python3 + UV"
+      , uses = Some "astral-sh/setup-uv@v1"
+      }
+
+let installPythonDeps =
+      GHA.Step::{
+      , name = Some "Install Python dependencies"
+      , run = Some "cd PaymentLinks && uv sync"
       }
 
 let generateCheckouts =
@@ -64,6 +70,7 @@ in  GHA.Workflow::{
             , installDhall
             , convertData
             , setupPython
+            , installPythonDeps
             , generateCheckouts
             , installHugo
             , build
