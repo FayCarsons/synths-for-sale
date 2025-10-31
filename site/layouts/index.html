@@ -11,6 +11,7 @@
       <p class="info">buyer pays shipping!</p>
       <p class="info">Email me to purchase: <a href="mailto:faycarsons23@gmail.com">faycarsons23@gmail.com</a></p>
     </div>
+    {{ $checkoutLinks := .Site.Data.checkout_links }}
     {{ range .Site.Data.synths }}
     <div class="product">
         <h2>{{ .name }}</h2>
@@ -21,6 +22,9 @@
         <div class="images">
           {{ range .images }}<img src="{{ (printf "images/%s" .) }}" alt="">{{ end }}
         </div>
+        {{ end }}
+        {{ if (index $checkoutLinks .name) }}
+        <a href="{{ index $checkoutLinks .name }}" class="buy-btn">Buy</a>
         {{ end }}
     </div>
     {{ end }}
