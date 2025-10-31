@@ -10,6 +10,10 @@ jobs:
           github_token: "${{ github.token }}"
       - name: Convert Dhall to JSON
         run: "dhall-to-json --file synths.dhall > site/data/synths.json"
+      - name: Set up Python3
+        uses: "actions/setup-python@v4"
+        with:
+          python-version: '3.11'
       - name: "Set up Python3 + UV"
         uses: "astral-sh/setup-uv@v1"
       - env:
