@@ -34,7 +34,12 @@
 
               uv
               python3
+              (writeShellScriptBin "mock-data" ''
+                dhall-to-json --file synths.dhall > site/data/synths.json
+                dhall-to-json --file testCheckoutLinks.dhall > site/data/checkoutLinks.json
+              '')
             ];
+
           };
       }
     );

@@ -1,32 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Synths for Sale</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>Synths for Sale</h1>
-    <div class="info-header">
-      <em class="americans">US only</em>
-      <p class="info">buyer pays shipping!</p>
-      <p class="info">Email me to purchase: <a href="mailto:faycarsons23@gmail.com">faycarsons23@gmail.com</a></p>
-    </div>
-    {{ $checkoutLinks := .Site.Data.checkoutLinks }}
-    {{ range .Site.Data.synths }}
-    <div class="product">
-        <h2>{{ .name }}</h2>
-        <p><strong>{{ .brand }}</strong></p>
+    <header>
+      <h1>Synths for Sale</h1>
+    </header>
+    
+    <section class="info-section">
+      <p class="intro">Hi! This is where I sell the synths I don't use anymore</p>
+      <p class="us-only">US only pls</p>
+      
+      <div class="shipping-info">
+        <h2>Buyer pays shipping</h2>
+        <ul>
+          <li>Modules: $15</li>
+          <li>Desktop synths: $20+ depending on size</li>
+          <li>Really small stuff: probably free</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="products">
+      {{ $checkoutLinks := .Site.Data.checkoutLinks }}
+      {{ range .Site.Data.synths }}
+      <article class="product">
+        <div class="product-header">
+          <h2>{{ .name }}</h2>
+          <p class="brand">{{ .brand }}</p>
+        </div>
+        
         <p class="price">${{ .price }}</p>
-        {{ if .note }}<p><em>{{ .note }}</em></p>{{ end }}
+        
+        {{ if .note }}
+        <p class="note">{{ .note }}</p>
+        {{ end }}
+        
         {{ if .images }}
         <div class="images">
-          {{ range .images }}<img src="{{ (printf "images/%s" .) }}" alt="">{{ end }}
+          {{ range .images }}
+          <img src="{{ (printf "images/%s" .) }}" >
+          {{ end }}
         </div>
         {{ end }}
-        {{ if (index $checkoutLinks .name) }}
-        <a href="{{ index $checkoutLinks .name }}" class="buy-btn">Buy</a>
-        {{ end }}
-    </div>
-    {{ end }}
+        
+        <a href="{{ (index $checkoutLinks .name) }}" class="buy-btn">Buy Now</a>
+      </article>
+      {{ end }}
+    </section>
   </body>
 </html>

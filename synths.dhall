@@ -1,16 +1,9 @@
-let Synth
-    : Type
-    = { name : Text
-      , brand : Text
-      , price : Natural
-      , images : List Text
-      , note : Optional Text
-      }
+let types = ./types.dhall
 
 in    [ { name = "Angle Grinder"
         , brand = "Schlappi Engineering"
         , price = 250
-        , images = [ "angle-grinder.png" ]
+        , images = [ "coming-soon.jpg" ]
         , note = None Text
         }
       , { name = "Ochd"
@@ -61,8 +54,7 @@ in    [ { name = "Angle Grinder"
         , brand = "ALA Audio?"
         , price = 75
         , images = [ "plaits1.png", "/plaits.png" ]
-        , note = Some
-            "I think this is ALA audio, idk. A plaits clone. V1. Works as expected."
+        , note = Some "Plaits clone, ALA audio I think? V1 firmware"
         }
       , { name = "Powered Skiff"
         , brand = "Make Noise"
@@ -77,4 +69,4 @@ in    [ { name = "Angle Grinder"
         , note = None Text
         }
       ]
-    : List Synth
+    : List types.Synth
