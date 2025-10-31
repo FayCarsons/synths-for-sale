@@ -19,13 +19,13 @@ jobs:
       - env:
           STRIPE_SECRET_KEY: "${{ secrets.STRIPE_SECRET_KEY }}"
         name: Generate Stripe checkout links
-        run: "cd PaymentLinks && uv sync && uv run main.py ../site/data/synths.json ../site/data/checkout-links.json"
+        run: "cd PaymentLinks && uv sync && uv run main.py ../site/data/synths.json ../site/data/checkoutLinks.json"
       - name: Install Hugo
         uses: "peaceiris/actions-hugo@v2"
         with:
           hugo-version: latest
       - name: Build
-        run: "cd site && hugo"
+        run: "cd site && hugo --cleanDestinationDir"
       - name: Deploy
         uses: "peaceiris/actions-gh-pages@v3"
         with:

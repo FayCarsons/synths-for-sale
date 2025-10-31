@@ -45,7 +45,11 @@ let installHugo =
       , `with` = Some (toMap { hugo-version = "latest" })
       }
 
-let build = GHA.Step::{ name = Some "Build", run = Some "cd site && hugo" }
+let build =
+      GHA.Step::{
+      , name = Some "Build"
+      , run = Some "cd site && hugo --cleanDestinationDir"
+      }
 
 let deploy =
       GHA.Step::{
