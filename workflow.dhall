@@ -26,7 +26,7 @@ let generateCheckouts =
       GHA.Step::{
       , name = Some "Generate Stripe checkout links"
       , run = Some
-          "uv run --with stripe PaymentLinks/main.py site/data/synths.json site/data/checkout-links.json"
+          "cd PaymentLinks && uv sync && uv run main.py site/data/synths.json site/data/checkout-links.json"
       , env = Some
           (toMap { STRIPE_SECRET_KEY = "\${{ secrets.STRIPE_SECRET_KEY }}" })
       }

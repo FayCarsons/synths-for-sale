@@ -9,7 +9,7 @@ def main():
 
     data_file = sys.argv[1]
     output_file = sys.argv[2]
-    stripe.api_key = "TEST"
+    stripe.api_key = os.getenv('STRIPE_SECRET_KEY')
 
     with open(data_file) as f:
         products = json.load(f)
