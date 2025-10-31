@@ -22,17 +22,11 @@ let setupPython =
       , uses = Some "astral-sh/setup-uv@v1"
       }
 
-let installPythonDeps =
-      GHA.Step::{
-      , name = Some "Install Python dependencies"
-      , run = Some "cd PaymentLinks && uv sync"
-      }
-
 let generateCheckouts =
       GHA.Step::{
       , name = Some "Generate Stripe checkout links"
       , run = Some
-          "uv run PaymentLinks/main.py site/data/synths.json site/data/checkout-links.json"
+          "uv sync && uv run PaymentLinks/main.py site/data/synths.json site/data/checkout-links.json"
       , env = Some
           (toMap { STRIPE_SECRET_KEY = "\${{ secrets.STRIPE_SECRET_KEY }}" })
       }
@@ -70,7 +64,6 @@ in  GHA.Workflow::{
             , installDhall
             , convertData
             , setupPython
-            , installPythonDeps
             , generateCheckouts
             , installHugo
             , build
