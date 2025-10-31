@@ -15,7 +15,7 @@ jobs:
       - env:
           STRIPE_SECRET_KEY: "${{ secrets.STRIPE_SECRET_KEY }}"
         name: Generate Stripe checkout links
-        run: uv run PaymentLinks/main.py site/data/synths.json site/data/checkout-links.json
+        run: "cd PaymentLinks && uv pip install stripe && uv run --with stripe main.py site/data/synths.json site/data/checkout-links.json"
       - name: Install Hugo
         uses: "peaceiris/actions-hugo@v2"
         with:
