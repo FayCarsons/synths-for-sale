@@ -5,11 +5,14 @@ import sys
 
 def main():
     if len(sys.argv) < 3:
-        sys.ext(1)
+        sys.exit(1)
 
     data_file = sys.argv[1]
     output_file = sys.argv[2]
     stripe.api_key = os.getenv('STRIPE_SECRET_KEY')
+
+    if not stripe.api_key:
+        raise ValueError("Stripe key env var not set")
 
     with open(data_file) as f:
         products = json.load(f)
