@@ -18,6 +18,13 @@ let convertData =
 
 let setupPython =
       GHA.Step::{
+      , name = Some "Set up Python3"
+      , uses = Some "actions/setup-python@v4"
+      , `with` = Some (toMap { python-version = "3.11" })
+      }
+
+let setupUV =
+      GHA.Step::{
       , name = Some "Set up Python3 + UV"
       , uses = Some "astral-sh/setup-uv@v1"
       }
@@ -64,6 +71,7 @@ in  GHA.Workflow::{
             , installDhall
             , convertData
             , setupPython
+            , setupUV
             , generateCheckouts
             , installHugo
             , build
