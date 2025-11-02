@@ -56,7 +56,7 @@ def main():
                         'name': product['name'],
                         'description': product.get('note', f"${product['price']}")
                     },
-                    'unit_amount': int(product['price'] * 100)
+                    'unit_amount': int(product['price'] * 10_000)
                 },
                 'quantity': 1
             }],
