@@ -34,10 +34,10 @@ def main():
 
     for product in products:
         size = product['size']
-        shipping_amount: Int = shipping_rates[size]
+        shipping_amount: Int = shipping_rates.get(size, None)
         shipping_options = [{
             'shipping_rate_data': shipping_amount
-        }] if size != 'Small' else []
+        }] if shipping_amount is not None else []
 
         session = stripe.checkout.Session.create(
             payment_method_types=[
