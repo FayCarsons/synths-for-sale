@@ -20,7 +20,7 @@ def main():
             'type': 'fixed_amount',
             'fixed_amount': { 'amount': rate, 'currency': 'usd' },
             'display_name': 'shipping'
-        } if size != 'small' else None
+        } if size != 'Small' else None
         for size,rate in json.load(open(shipping_path)).items()
     }
 
@@ -33,6 +33,16 @@ def main():
     checkout_links = {}
 
     for product in products:
+        size = product['size']
+        shipping_amount = shipping_rates[size]
+        shipping_options = [{
+            'shipping_rate_data': {
+                'type': 'fixed_amount',
+                'fixed_amount': { 'amount': shipping_amount },
+                'display_name': 'Shipping'
+            }
+        }] if size != 'Small' else []
+
         session = stripe.checkout.Session.create(
             payment_method_types=[
             'card', 
@@ -54,7 +64,7 @@ def main():
                 },
                 'quantity': 1
             }],
-            shipping_rate_data=shipping_rates[product['size']],
+            shipping_options=shipping_options,
             mode='payment',
             success_url='https://faycarsons.github.io/synths-for-sale',
             cancel_url='https://faycarsons.github.io/synths-for-sale'
