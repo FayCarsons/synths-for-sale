@@ -34,13 +34,9 @@ def main():
 
     for product in products:
         size = product['size']
-        shipping_amount = shipping_rates[size]
+        shipping_amount: Int = shipping_rates[size]
         shipping_options = [{
-            'shipping_rate_data': {
-                'type': 'fixed_amount',
-                'fixed_amount': { 'amount': shipping_amount },
-                'display_name': 'Shipping'
-            }
+            'shipping_rate_data': shipping_amount
         }] if size != 'Small' else []
 
         session = stripe.checkout.Session.create(
