@@ -18,7 +18,7 @@ def main():
     shipping_rates = {
         size: {
             'type': 'fixed_amount',
-            'fixed_amount': { 'amount': rate, 'currency': 'usd' },
+            'fixed_amount': { 'amount': int(rate), 'currency': 'usd' },
             'display_name': 'shipping'
         } if size != 'Small' else None
         for size,rate in json.load(open(shipping_path)).items()
