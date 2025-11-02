@@ -4,35 +4,35 @@ import os
 import sys
 
 def main():
-    if len(sys.argv) < 3:
-        sys.exit(1)
+    if len(sys.argv) < 2:
+        raise ValueError("Not enough arguments - expected data directory")
 
-    data_file = sys.argv[1]
-    output_file = sys.argv[2]
+    data_dir = sys.argv[1]
+    shipping_path = data_dir + '/shipping.json'
+    synths_path = data_dir + '/synths.json'
+    checkout_path = data_dir + '/checkoutLinks.json'
+
     stripe.api_key = os.getenv('STRIPE_SECRET_KEY')
 
-    print(f'STRIPE_SECRET_KEY: {stripe.api_key}')
+
+    shipping_rates = {
+        size: {
+            'type': 'fixed_amount',
+            'fixed_amount': { 'amount': amount, 'currency': 'usd' },
+            'display_name': 'shipping'
+        } if size != 'small' else None
+        for size,rate in json.load(open(shipping_path)).items()
+    }
 
     if not stripe.api_key:
         raise ValueError("Stripe key env var not set")
 
-    with open(data_file) as f:
+    with open(synths_path) as f:
         products = json.load(f)
 
     checkout_links = {}
 
     for product in products:
-        stripe_product = stripe.Product.create(
-            name=product['name'],
-            description=product.get('note', f"${product['price']}")
-        )
-
-        price = stripe.Price.create(
-            product=stripe_product.id,
-            unit_amount=int(product['price'] * 100),
-            currency='usd'
-        )
-
         session = stripe.checkout.Session.create(
             payment_method_types=[
             'card', 
@@ -44,9 +44,17 @@ def main():
             'crypto'
             ],
             line_items=[{
-                'price': price.id,
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {
+                        'name': product['name'],
+                        'description': product.get('note', f"${product['price']}")
+                    },
+                    'unit_amount': int(product['price'] * 100)
+                },
                 'quantity': 1
             }],
+            shipping_rate_data=shipping_rates[product['size']],
             mode='payment',
             success_url='https://faycarsons.github.io/synths-for-sale',
             cancel_url='https://faycarsons.github.io/synths-for-sale'
@@ -54,11 +62,8 @@ def main():
 
         checkout_links[product['name']] = session.url
 
-    with open(output_file, 'w') as f:
+    with open(checkout_path, 'w') as f:
         json.dump(checkout_links, f, indent=2)
-
-    print('Generated payment links')
-
 
 if __name__ == "__main__":
     main()

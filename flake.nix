@@ -18,6 +18,15 @@
         pkgs = import nixpkgs {
           inherit system;
         };
+        mock-data = pkgs.writeShellScriptBin "mock-data" ''
+          dhall-to-json --file synths.dhall > site/data/synths.json
+          dhall-to-json --file testCheckoutLinks.dhall > site/data/checkoutLinks.json
+          dhall-to-json --file shipping.dhall > site/data/shippingRates.json
+        '';
+
+        workflow = pkgs.writeShellScriptBin "workflow" ''
+          dhall-to-yaml --file workflow.dhall > .github/workflows/deploy.yml
+        '';
       in
       {
         devShells.default =
@@ -34,10 +43,9 @@
 
               uv
               python3
-              (writeShellScriptBin "mock-data" ''
-                dhall-to-json --file synths.dhall > site/data/synths.json
-                dhall-to-json --file testCheckoutLinks.dhall > site/data/checkoutLinks.json
-              '')
+
+              mock-data
+              workflow
             ];
 
           };

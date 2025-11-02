@@ -1,3 +1,5 @@
+let Size = < Small | Medium | Large >
+
 let Synth
     : Type
     = { name : Text
@@ -5,6 +7,7 @@ let Synth
       , price : Natural
       , images : List Text
       , note : Optional Text
+      , size : Size
       }
 
-in  { Synth }
+in  { Synth, Size }
