@@ -13,7 +13,7 @@ let installDhall =
 let convertData =
       GHA.Step::{
       , name = Some "Convert Dhall to JSON"
-      , run = Some "dhall-to-json --file synths.dhall > site/data/synths.json"
+      , run = Some "dhall-to-json --file synths.dhall > site/data/synths.json && dhall-to-json --file shipping.dhall > site/data/shipping.json"
       }
 
 let setupPython =
