@@ -1,9 +1,14 @@
 let types = ./types.dhall
 
-let Small = types.Size.Small
+let Size
+    : Type
+    = types.Size
 
-let Medium = types.Size.Medium
+let show =
+      \(s : Size) ->
+        merge { Small = "Small", Medium = "Medium", Large = "Large" } s
 
-let Large = types.Size.Large
-
-in  toMap { Small = "free", Medium = "\$10", Large = "\$30" }
+in  [ { mapKey = show Size.Small, mapValue = None Natural }
+    , { mapKey = show Size.Medium, mapValue = Some 10 }
+    , { mapKey = show Size.Large, mapValue = Some 30 }
+    ]
