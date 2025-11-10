@@ -36,8 +36,10 @@
               pkg-config
               cmake
               openssl
+
               dhall
               dhall-json
+              jq
               dhall-lsp-server
               hugo
 
