@@ -43,7 +43,7 @@ in    [ { name = "Angle Grinder"
         , brand = "Expert Sleepers"
         , price = 30
         , images = [] : List Text
-        , note = Some "\$10 bundled with a disting"
+        , note = Some "or free w/ Disting"
         , size = Size.Small
         }
       , { name = "Ciao"
