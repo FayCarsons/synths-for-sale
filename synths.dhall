@@ -10,7 +10,7 @@ in    [ { name = "Angle Grinder"
         , size = Size.Medium
         }
       , { name = "Ochd"
-        , brand = "DivKid && Instruo"
+        , brand = "DivKid + Instruo"
         , price = 150
         , images = [ "ochd.png" ]
         , note = None Text
@@ -31,7 +31,7 @@ in    [ { name = "Angle Grinder"
         , note = None Text
         , size = Size.Medium
         }
-      , { name = "Disting Ex (damaged screen)"
+      , { name = "Disting Ex (dead pixels)"
         , brand = "Expert Sleepers"
         , price = 200
         , images = [ "coming-soon.jpg" ]
@@ -43,7 +43,7 @@ in    [ { name = "Angle Grinder"
         , brand = "Expert Sleepers"
         , price = 30
         , images = [] : List Text
-        , note = Some "\$10 if bundled with a disting"
+        , note = Some "\$10 bundled with a disting"
         , size = Size.Small
         }
       , { name = "Ciao"
@@ -54,7 +54,7 @@ in    [ { name = "Angle Grinder"
         , size = Size.Medium
         }
       , { name = "Rnd Step"
-        , brand = "DivKid && Steady State Fate"
+        , brand = "DivKid + Steady State Fate"
         , price = 250
         , images = [ "rnd-step.png" ]
         , note = None Text
