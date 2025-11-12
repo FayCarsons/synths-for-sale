@@ -16,11 +16,16 @@ def main():
 
 
     shipping_rates = {
-        size: {
-            'type': 'fixed_amount',
-            'fixed_amount': { 'amount': int(rate) * 100, 'currency': 'usd' },
-            'display_name': 'shipping'
-        } if size != 'Small' else None
+        size: (
+            stripe.ShippingRate.create(
+                display_name=f'{size} Item Shipping',
+                type='fixed_amount',
+                fixed_amount={
+                    'amount': int(rate) * 100,
+                    'currency': 'usd'
+                }
+            ).id
+        ) if size != 'Small' else None
         for size,rate in json.load(open(shipping_path)).items()
     }
 
@@ -33,40 +38,40 @@ def main():
     checkout_links = {}
 
     for product in products:
-        size = product['size']
-        shipping_amount: Int = shipping_rates.get(size, None)
-        shipping_options = [{
-            'shipping_rate_data': shipping_amount
-        }] if shipping_amount is not None else []
-
-        session = stripe.checkout.Session.create(
-            payment_method_types=[
-            'card', 
-            #'paypal',
-            'affirm',
-            'klarna',
-            'link',
-            'cashapp', 
-            'crypto'
-            ],
-            line_items=[{
-                'price_data': {
-                    'currency': 'usd',
-                    'product_data': {
-                        'name': product['name'],
-                        'description': product.get('note', f"${product['price']}")
-                    },
-                    'unit_amount': int(product['price'] * 100)
-                },
-                'quantity': 1
-            }],
-            shipping_options=shipping_options,
-            mode='payment',
-            success_url='https://faycarsons.github.io/synths-for-sale',
-            cancel_url='https://faycarsons.github.io/synths-for-sale'
+        stripe_product = stripe.Product.create(
+            name=product['name'],
+            description=product.get('note', '')
         )
 
-        checkout_links[product['name']] = session.url
+        stripe_price = stripe.Price.create(
+            product=stripe_product.id,
+            unit_amount=int(product['price'] * 100),
+            currency='usd'
+        )
+
+        size = product['size']
+        shipping_options = []
+        
+        if size and size in shipping_rates:
+            shipping_options = [{'shipping_rate': shipping_rates[size]}]
+
+        payment_link_params = {
+            'line_items': [{
+                "price": stripe_price.id, 
+                "quantity": 1
+            }],
+            'shipping_address_collection': {"allowed_countries": ["US"]},
+            'after_completion': { "type": "redirect", "redirect": {
+                "url": 
+                "https://faycarsons.github.io/synths-for-sale"} 
+            }
+        }
+
+        if shipping_options: 
+            payment_link_params['shipping_options'] = shipping_options
+
+        payment_link = stripe.PaymentLink.create(**payment_link_params)
+        checkout_links[product['name']] = payment_link.url
 
     with open(checkout_path, 'w') as f:
         json.dump(checkout_links, f, indent=2)
