@@ -46,7 +46,7 @@ def main():
                 name=product['name'],
                 description=description
             )
-        else 
+        else:
             stripe_product = stripe.Product.create(
                 name=product['name'],
             )
