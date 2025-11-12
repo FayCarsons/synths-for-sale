@@ -38,10 +38,18 @@ def main():
     checkout_links = {}
 
     for product in products:
-        stripe_product = stripe.Product.create(
-            name=product['name'],
-            description=product.get('note', '')
-        )
+        stripe_product = None
+        description = product.get('note', None)
+
+        if description is not None:
+            stripe_product = stripe.Product.create(
+                name=product['name'],
+                description=description
+            )
+        else 
+            stripe_product = stripe.Product.create(
+                name=product['name'],
+            )
 
         stripe_price = stripe.Price.create(
             product=stripe_product.id,
@@ -52,7 +60,7 @@ def main():
         size = product['size']
         shipping_options = []
         
-        if size and size in shipping_rates:
+        if size and size in shipping_rates and shipping_rates[size] is not None:
             shipping_options = [{'shipping_rate': shipping_rates[size]}]
 
         payment_link_params = {
