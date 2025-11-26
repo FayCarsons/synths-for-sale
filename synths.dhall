@@ -46,25 +46,11 @@ in    [ { name = "Angle Grinder"
         , note = Some "or free w/ Disting"
         , size = Size.Small
         }
-      , { name = "Ciao"
-        , brand = "Bastl"
-        , price = 75
-        , images = [ "coming-soon.jpg" ]
-        , note = None Text
-        , size = Size.Medium
-        }
       , { name = "Rnd Step"
         , brand = "DivKid + Steady State Fate"
         , price = 250
         , images = [ "rnd-step.png" ]
         , note = None Text
-        , size = Size.Medium
-        }
-      , { name = "Plaits"
-        , brand = "ALA Audio?"
-        , price = 75
-        , images = [ "plaits1.png", "/plaits.png" ]
-        , note = Some "Plaits clone, ALA audio I think? V1 firmware"
         , size = Size.Medium
         }
       , { name = "Powered Skiff"
